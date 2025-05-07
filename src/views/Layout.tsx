@@ -16,6 +16,16 @@ const Layout = () => {
     homeRef.current.play();
   };
 
+  const hymyHandler = () => {
+    if (!hymyRef.current) return;
+    hymyRef.current.play();
+  };
+
+  const hymyCompleteHandler = () => {
+    if (!hymyRef.current) return;
+    hymyRef.current.goToAndStop(0, true);
+  };
+
   const completeHandler = () => {
     if (!homeRef.current) return;
     homeRef.current.goToAndStop(0, true);
@@ -77,6 +87,7 @@ const Layout = () => {
             <Link
               className="block p-4 text-center  hover:bg-slate-300"
               to="/example"
+              onMouseEnter={hymyHandler}
             >
               <div className="flex items-baseline">
                 Example
@@ -85,7 +96,7 @@ const Layout = () => {
                   animationData={hymyData}
                   loop={false}
                   autoplay={false}
-                  onComplete={completeHandler}
+                  onComplete={hymyCompleteHandler}
                 />
               </div>
             </Link>
