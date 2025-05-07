@@ -2,11 +2,13 @@ import { Link, Outlet } from "react-router";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import taloData from "../assets/lottie/talo.json";
 import hamppariData from "../assets/lottie/hampurilainen.json";
+import hymyData from "../assets/lottie/smiley.json";
 import { useEffect, useRef, useState } from "react";
 
 const Layout = () => {
   const homeRef = useRef<LottieRefCurrentProps>(null);
   const hamppariRef = useRef<LottieRefCurrentProps>(null);
+  const hymyRef = useRef<LottieRefCurrentProps>(null);
   const [menuToggle, setMenuToggle] = useState(false);
 
   const hoverHandler = () => {
@@ -76,7 +78,16 @@ const Layout = () => {
               className="block p-4 text-center  hover:bg-slate-300"
               to="/example"
             >
-              Example
+              <div className="flex items-baseline">
+                Example
+                <Lottie
+                  lottieRef={hymyRef}
+                  animationData={hymyData}
+                  loop={false}
+                  autoplay={false}
+                  onComplete={completeHandler}
+                />
+              </div>
             </Link>
           </li>
         </ul>
