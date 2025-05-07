@@ -13,22 +13,26 @@ const Layout = () => {
 
   const hoverHandler = () => {
     if (!homeRef.current) return;
+    homeRef.current.setDirection(1);
+    homeRef.current.play();
+  };
+
+  const homeHoverLeaveHandler = () => {
+    if (!homeRef.current) return;
+    homeRef.current.setDirection(-1); // play in reverse
     homeRef.current.play();
   };
 
   const hymyHandler = () => {
     if (!hymyRef.current) return;
+    hymyRef.current.setDirection(1);
     hymyRef.current.play();
   };
 
-  const hymyCompleteHandler = () => {
+  const hymyHoverLeaveHandler = () => {
     if (!hymyRef.current) return;
-    hymyRef.current.goToAndStop(0, true);
-  };
-
-  const completeHandler = () => {
-    if (!homeRef.current) return;
-    homeRef.current.goToAndStop(0, true);
+    hymyRef.current.setDirection(-1); // play in reverse
+    hymyRef.current.play();
   };
 
   const menuHandler = () => {
@@ -53,9 +57,9 @@ const Layout = () => {
           mr-4
           justify-end
           overflow-hidden
-          rounded-lg
+          rounded-md
           bg-slate-200
-          p-0
+          p-1
           shadow-md
           transition-all
           duration-500
@@ -67,36 +71,38 @@ const Layout = () => {
         >
           <li>
             <Link
-              className="block p-4 text-center  hover:bg-slate-300"
+              className="block px-3 py-2 text-center tex-center hover:bg-slate-300"
               to="/"
               onMouseEnter={hoverHandler}
+              onMouseLeave={homeHoverLeaveHandler}
             >
-              <div className="flex items-baseline">
+              <div className="flex items-center gap-1 text-black">
                 Home
                 <Lottie
                   lottieRef={homeRef}
                   animationData={taloData}
                   loop={false}
                   autoplay={false}
-                  onComplete={completeHandler}
+                  className="h-50 w-50"
                 />
               </div>
             </Link>
           </li>
           <li>
             <Link
-              className="block p-4 text-center  hover:bg-slate-300"
+              className="block px-3 py-2 text-center  hover:bg-slate-300"
               to="/example"
               onMouseEnter={hymyHandler}
+              onMouseLeave={hymyHoverLeaveHandler}
             >
-              <div className="flex items-baseline">
-                Example
+              <div className="flex items-center gap-1 text-black">
+                Smile
                 <Lottie
                   lottieRef={hymyRef}
                   animationData={hymyData}
                   loop={false}
                   autoplay={false}
-                  onComplete={hymyCompleteHandler}
+                  className="h-50 w-50"
                 />
               </div>
             </Link>
